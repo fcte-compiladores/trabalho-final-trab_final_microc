@@ -123,17 +123,17 @@ class McTransformer(Transformer):
         num = int(token)
         return Literal(num)
     
-    def NULL(self, _):
+    def NULL(self):
         return Literal(None)
 
     # Tipos
-    def type_int(self, _):
+    def type_int(self):
         return Type("int")
 
-    def type_char(self, _):
+    def type_char(self):
         return Type("char")
 
-    def type_void(self, _):
+    def type_void(self):
         return Type("void")
 
     # Declaracoes

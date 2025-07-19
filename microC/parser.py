@@ -11,7 +11,7 @@ from typing import Iterator
 from lark import Lark, Token, Tree
 
 from .ast import Expr, Program
-from .transformer import LoxTransformer
+from .transformer import McTransformer
 
 DIR = Path(__file__).parent
 GRAMMAR_PATH = DIR / "grammar.lark"
@@ -19,7 +19,7 @@ GRAMMAR_PATH = DIR / "grammar.lark"
 
 ast_parser = Lark(
     GRAMMAR_PATH.open(),
-    transformer=LoxTransformer(),
+    transformer=McTransformer(),
     parser="lalr",
     start=["start", "expr"],
 )

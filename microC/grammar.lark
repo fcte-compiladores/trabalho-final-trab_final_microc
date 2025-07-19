@@ -99,7 +99,7 @@ printf_stmt: "printf" "(" expr ")" ";"
 ?call: VAR "(" [call_params] ")" -> call
      | atom
 
-arg_list: expr ("," expr)*
+call_params: expr ("," expr)*
 
 ?atom: NUMBER
      | CHAR

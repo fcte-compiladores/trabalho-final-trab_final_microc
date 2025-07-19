@@ -14,9 +14,7 @@ pytest.register_assert_rewrite("lox.testing")
 from microC import testing  # noqa: E402
 
 BASE_DIR = Path(__file__).parent.parent
-EXERCISES = BASE_DIR / "exercicios"
 EXAMPLES = BASE_DIR / "exemplos"
-EXERCISES_ALT = BASE_DIR / "exercícios"
 LEX_REGEX = re.compile(
     r"""
     (?://\ *expect:\ (?P<EXPECT>[^\n]*))
@@ -53,16 +51,14 @@ def pytest_runtest_setup(item):
 @pytest.fixture
 def exercises_folder():
     """
-    Retorna o caminho para a pasta de exercícios.
+    Retorna o caminho para a pasta de exercícios/exemplos.
     """
-    if EXERCISES.exists():
-        return EXERCISES
-    elif EXERCISES_ALT.exists():
-        return EXERCISES_ALT
+    if EXAMPLES.exists():
+        return EXAMPLES
     else:
         raise FileNotFoundError(
-            f"Não foi possível encontrar a pasta de exercícios. "
-            f"Verifique se a pasta {EXERCISES} ou {EXERCISES_ALT} existe."
+            f"Não foi possível encontrar a pasta de exemplos. "
+            f"Verifique se a pasta {EXAMPLES} existe."
         )
 
 
