@@ -1,0 +1,30 @@
+1. Validação Semântica
+A - Verificar tipos em operações (ex: não permitir int + char). - FEITO
+B - Verificar inicialização e uso de variáveis não declaradas. - FEITO
+C - Verificar limites de arrays em tempo de execução. - FEITO
+D - Verificar duplicidade de nomes (variáveis, funções, parâmetros). - FEITO
+
+2. Funções
+A - Suporte para passagem de arrays como parâmetros.
+B - Suporte para retorno de arrays (talvez).
+C - Verificar se o tipo de retorno da função está correto.
+
+3. Strings
+A - Impressão de strings. - FEITO
+
+4. Operadores
+A - Operadores incrementais (++, --). - FEITO
+B - Operador de atribuição composta (+=, -=, etc.). - FEITO
+
+5. Controle de Fluxo
+A - Suporte para break e continue em laços.
+B - Suporte para do-while. - FEITO
+
+6. Erros e Mensagens
+A - Mensagens de erro mais detalhadas para o usuário. - SE SOBRAR TEMPO
+B - Testes para todos os casos de erro (semântica e sintaxe).
+
+Se sobrar tempo
+7. Testes
+A - Testes unitários para todas as construções da linguagem.
+B - Testes de integração para programas completos.

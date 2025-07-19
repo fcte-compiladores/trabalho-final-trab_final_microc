@@ -1,0 +1,117 @@
+?start: program
+
+program: decl*
+
+?decl: var_decl
+     | func_decl
+     | stmt
+
+type : "int"   -> type_int 
+     | "char"  -> type_char
+     | "void"  -> type_void
+
+var_decl: type VAR ("=" expr)? ";"
+        | type VAR "[" NUMBER "]" ("=" "{" [array_init] "}")? ";"  -> array_decl
+
+array_init: expr ("," expr)*
+
+func_decl: type VAR "(" [param_list] ")" block
+
+param_list: type VAR ("," type VAR)*
+
+?stmt: expr_stmt
+     | if_stmt
+     | while_stmt
+     | do_while_stmt
+     | for_cmd
+     | block
+     | return_stmt
+     | printf_stmt
+
+for_cmd: "for" "(" forinit forcond ";" forincr ")" stmt
+
+forinit: var_decl
+       | expr_stmt
+       | ";"
+
+forcond: expr?
+forincr: expr?
+
+expr_stmt: expr ";"
+
+if_stmt: "if" "(" expr ")" stmt ("else" stmt)?
+
+while_stmt: "while" "(" expr ")" stmt
+
+do_while_stmt: "do" stmt "while" "(" expr ")" ";"
+
+block: "{" decl* "}"
+
+return_stmt: "return" expr? ";"
+
+printf_stmt: "printf" "(" expr ")" ";"
+
+?expr: assign_expr
+
+?assign_expr: VAR "=" assign_expr         -> set
+            | VAR "+=" assign_expr       -> iadd
+            | VAR "-=" assign_expr       -> isub
+            | VAR "*=" assign_expr       -> imul
+            | VAR "/=" assign_expr       -> itruediv
+            | or_expr
+
+?or_expr: or_expr "||" and_expr   -> or_
+        | and_expr
+
+?and_expr: and_expr "&&" eq_expr -> and_
+         | eq_expr
+
+?eq_expr: eq_expr "==" rel_expr  -> eq
+        | eq_expr "!=" rel_expr  -> ne
+        | rel_expr
+
+?rel_expr: rel_expr ">" add_expr   -> gt
+         | rel_expr "<" add_expr   -> lt
+         | rel_expr ">=" add_expr  -> ge
+         | rel_expr "<=" add_expr  -> le
+         | add_expr
+
+?add_expr: add_expr "+" mul_expr   -> add
+         | add_expr "-" mul_expr   -> sub
+         | mul_expr
+
+?mul_expr: mul_expr "*" unary_expr -> mul
+         | mul_expr "/" unary_expr -> div
+         | mul_expr "%" unary_expr -> mod
+         | unary_expr
+
+?unary_expr: "!" unary_expr        -> not_
+           | "-" unary_expr        -> neg
+           | "++" unary_expr       -> preinc
+           | "--" unary_expr       -> predec
+           | postfix
+
+?postfix: postfix "++"             -> postinc
+        | postfix "--"             -> postdec
+        | call "[" expr "]"        -> array_access
+        | call
+
+?call: VAR "(" [call_params] ")" -> call
+     | atom
+
+arg_list: expr ("," expr)*
+
+?atom: NUMBER
+     | CHAR
+     | NULL
+     | VAR
+     | "(" expr ")"
+
+NULL: "NULL"
+VAR.1: /[a-zA-Z_]\w*/
+NUMBER: /([1-9][0-9]*|0)/
+CHAR: /'(\\.|[^\\'])'/
+COMMENT: "//" /[^\n]*/
+MULTILINE_COMMENT: /\/\*[\s\S]*?\*\//
+
+%ignore /\s/ | COMMENT | MULTILINE_COMMENT
