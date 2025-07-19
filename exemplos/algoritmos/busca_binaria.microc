@@ -1,0 +1,35 @@
+// Exemplo 2: Busca binária em array ordenado
+int buscaBinaria(int arr[], int n, int procurado) {
+    int esquerda = 0;
+    int direita = n - 1;
+    
+    while (esquerda <= direita) {
+        int meio = (esquerda + direita) / 2;
+        
+        if (arr[meio] == procurado) {
+            return meio;
+        }
+        
+        if (arr[meio] < procurado) {
+            esquerda = meio + 1;
+        } else {
+            direita = meio - 1;
+        }
+    }
+    
+    return -1; // Não encontrado
+}
+
+int main() {
+    int numeros[8] = {2, 5, 8, 12, 16, 23, 38, 45};
+    int procurado = 23;
+    
+    int resultado = buscaBinaria(numeros, 8, procurado);
+    printf(resultado); // Deve retornar 5 (índice do 23)
+    
+    procurado = 100;
+    resultado = buscaBinaria(numeros, 8, procurado);
+    printf(resultado); // Deve retornar -1 (não encontrado)
+    
+    return 0;
+}

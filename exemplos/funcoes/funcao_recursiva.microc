@@ -1,0 +1,17 @@
+// Exemplo 3: Função recursiva - cálculo de potência
+int potencia(int base, int exp) {
+    if (exp == 0) {
+        return 1;
+    }
+    return base * potencia(base, exp - 1);
+}
+
+int main() {
+    int resultado1 = potencia(2, 3);  // 2^3 = 8
+    int resultado2 = potencia(5, 2);  // 5^2 = 25
+    
+    printf(resultado1);
+    printf(resultado2);
+    
+    return 0;
+}

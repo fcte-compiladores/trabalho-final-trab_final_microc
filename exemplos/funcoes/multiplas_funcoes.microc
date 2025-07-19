@@ -1,0 +1,18 @@
+// Exemplo 2: Função void e múltiplas funções
+void imprimirNumero(int num) {
+    printf(num);
+}
+
+int quadrado(int x) {
+    return x * x;
+}
+
+int main() {
+    int valor = 7;
+    int quad = quadrado(valor);
+    
+    imprimirNumero(valor);
+    imprimirNumero(quad);
+    
+    return 0;
+}

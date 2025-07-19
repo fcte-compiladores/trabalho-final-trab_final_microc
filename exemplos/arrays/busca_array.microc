@@ -1,0 +1,22 @@
+// Exemplo 3: Busca em array
+int main() {
+    int valores[6] = {15, 23, 8, 42, 16, 33};
+    int procurado = 42;
+    int encontrado = 0;
+    int posicao = -1;
+    
+    for (int i = 0; i < 6; i++) {
+        if (valores[i] == procurado) {
+            encontrado = 1;
+            posicao = i;
+        }
+    }
+    
+    if (encontrado) {
+        printf(posicao);
+    } else {
+        printf(-1);
+    }
+    
+    return 0;
+}

@@ -1,0 +1,29 @@
+// Exemplo 3: Operadores de incremento/decremento e atribuição composta
+int main() {
+    int num = 10;
+    
+    // Pré-incremento e pós-incremento
+    printf(++num);  // 11 (pré-incremento)
+    printf(num++);  // 11 (pós-incremento, mas num vira 12)
+    printf(num);    // 12
+    
+    // Pré-decremento e pós-decremento
+    printf(--num);  // 11 (pré-decremento)
+    printf(num--);  // 11 (pós-decremento, mas num vira 10)
+    printf(num);    // 10
+    
+    // Operadores de atribuição composta
+    num += 5;   // num = num + 5 = 15
+    printf(num);
+    
+    num -= 3;   // num = num - 3 = 12
+    printf(num);
+    
+    num *= 2;   // num = num * 2 = 24
+    printf(num);
+    
+    num /= 4;   // num = num / 4 = 6
+    printf(num);
+    
+    return 0;
+}

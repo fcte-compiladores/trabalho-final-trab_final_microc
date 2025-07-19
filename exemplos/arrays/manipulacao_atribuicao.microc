@@ -1,0 +1,15 @@
+// Exemplo 2: Manipulação de arrays com atribuição
+int main() {
+    int dados[4];
+    
+    dados[0] = 10;
+    dados[1] = 20;
+    dados[2] = 30;
+    dados[3] = 40;
+    
+    for (int i = 0; i < 4; i++) {
+        printf(dados[i]);
+    }
+    
+    return 0;
+}

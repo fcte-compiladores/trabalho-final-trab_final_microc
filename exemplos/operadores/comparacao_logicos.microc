@@ -1,0 +1,21 @@
+// Exemplo 2: Operadores de comparação e lógicos
+int main() {
+    int x = 10;
+    int y = 20;
+    int z = 10;
+    
+    // Operadores de comparação
+    printf(x == z);  // 1 (verdadeiro)
+    printf(x != y);  // 1 (verdadeiro)
+    printf(x < y);   // 1 (verdadeiro)
+    printf(x > y);   // 0 (falso)
+    printf(x <= z);  // 1 (verdadeiro)
+    printf(y >= x);  // 1 (verdadeiro)
+    
+    // Operadores lógicos
+    printf((x < y) && (z == x));  // 1 (verdadeiro)
+    printf((x > y) || (z == x));  // 1 (verdadeiro)
+    printf(!(x == y));            // 1 (verdadeiro)
+    
+    return 0;
+}

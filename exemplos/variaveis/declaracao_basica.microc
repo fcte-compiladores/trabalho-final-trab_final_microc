@@ -1,0 +1,12 @@
+// Exemplo 1: Declaração e inicialização básica de variáveis
+int main() {
+    int x = 10;
+    int y = 20;
+    char c = 'A';
+    
+    printf(x);
+    printf(y);
+    printf(c);
+    
+    return 0;
+}

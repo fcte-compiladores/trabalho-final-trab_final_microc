@@ -1,0 +1,21 @@
+// Exemplo 3: Laços for com diferentes configurações
+int main() {
+    // For básico
+    for (int i = 0; i < 5; i++) {
+        printf(i);
+    }
+    
+    // For com incremento diferente
+    for (int j = 10; j >= 0; j -= 2) {
+        printf(j);
+    }
+    
+    // For aninhado para criar padrão
+    for (int linha = 1; linha <= 3; linha++) {
+        for (int col = 1; col <= linha; col++) {
+            printf(col);
+        }
+    }
+    
+    return 0;
+}

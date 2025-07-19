@@ -1,0 +1,15 @@
+// Exemplo 3: Escopo de variáveis em blocos
+int main() {
+    int global_var = 100;
+    
+    {
+        int local_var = 50;
+        printf(global_var);
+        printf(local_var);
+    }
+    
+    printf(global_var);
+    // local_var não existe mais aqui
+    
+    return 0;
+}

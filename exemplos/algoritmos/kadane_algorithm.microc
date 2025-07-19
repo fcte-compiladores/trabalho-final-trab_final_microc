@@ -1,0 +1,29 @@
+// Exemplo 3: Algoritmo de maior subsequência contígua (Kadane)
+int maxSubarraySum(int arr[], int n) {
+    int max_atual = arr[0];
+    int max_global = arr[0];
+    
+    for (int i = 1; i < n; i++) {
+        if (max_atual < 0) {
+            max_atual = arr[i];
+        } else {
+            max_atual += arr[i];
+        }
+        
+        if (max_atual > max_global) {
+            max_global = max_atual;
+        }
+    }
+    
+    return max_global;
+}
+
+int main() {
+    // Array com números positivos e negativos
+    int numeros[8] = {-2, 1, -3, 4, -1, 2, 1, -5};
+    
+    int resultado = maxSubarraySum(numeros, 8);
+    printf(resultado); // Deve retornar 6 (subsequência [4, -1, 2, 1])
+    
+    return 0;
+}

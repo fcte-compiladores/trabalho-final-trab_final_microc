@@ -1,0 +1,18 @@
+// Exemplo 2: Laços while e do-while
+int main() {
+    // Laço while
+    int contador = 1;
+    while (contador <= 5) {
+        printf(contador);
+        contador++;
+    }
+    
+    // Laço do-while
+    int num = 10;
+    do {
+        printf(num);
+        num--;
+    } while (num > 7);
+    
+    return 0;
+}

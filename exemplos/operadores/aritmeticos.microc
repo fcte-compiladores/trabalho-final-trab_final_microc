@@ -1,0 +1,13 @@
+// Exemplo 1: Operadores aritméticos
+int main() {
+    int a = 15;
+    int b = 4;
+    
+    printf(a + b);  // Soma: 19
+    printf(a - b);  // Subtração: 11
+    printf(a * b);  // Multiplicação: 60
+    printf(a / b);  // Divisão: 3
+    printf(a % b);  // Módulo: 3
+    
+    return 0;
+}
