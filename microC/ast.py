@@ -1,7 +1,7 @@
 from abc import ABC
 from dataclasses import dataclass
 from typing import Callable, Optional
-from .runtime import McFunction, McReturn, McClass, McInstance
+from .runtime import McFunction, McReturn
 from .errors import SemanticError
 
 from .ctx import Ctx
