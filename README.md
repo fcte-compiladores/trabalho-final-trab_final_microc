@@ -228,44 +228,53 @@ Testes gerais e de integração:
 
 #### Executar todos os testes
 ```bash
-# Com pytest
-pytest tests/
+# Com UV (recomendado)
+uv run pytest
 
-# Com UV
-uv run pytest tests/
+# Com pytest diretamente
+pytest tests/
 ```
 
 #### Executar testes específicos
 ```bash
 # Testar apenas variáveis
-pytest tests/test_exemplos_variaveis.py
+uv run pytest tests/test_exemplos_variaveis.py
 
 # Testar apenas algoritmos
-pytest tests/test_exemplos_algoritmos.py
+uv run pytest tests/test_exemplos_algoritmos.py
 
 # Executar suite completa (inclui testes marcados como full_suite)
-pytest tests/ --full-suite
+uv run pytest --full-suite
+
+# Executar teste específico por nome/padrão
+uv run pytest --maxfail=1 -k lex_numeros
 ```
 
 #### Executar com verbosidade
 ```bash
 # Ver detalhes dos testes
-pytest tests/ -v
+uv run pytest -v
 
 # Ver output dos prints
-pytest tests/ -s
+uv run pytest -s
 
 # Parar no primeiro erro
-pytest tests/ -x
+uv run pytest -x
+
+# Limitar número de falhas
+uv run pytest --maxfail=1
 ```
 
 #### Executar testes específicos
 ```bash
 # Testar uma função específica
-pytest tests/test_exemplos_funcoes.py::TestFuncoes::test_funcao_simples
+uv run pytest tests/test_exemplos_funcoes.py::TestFuncoes::test_funcao_simples
 
 # Testar uma classe específica
-pytest tests/test_exemplos_arrays.py::TestArrays
+uv run pytest tests/test_exemplos_arrays.py::TestArrays
+
+# Buscar testes por padrão no nome
+uv run pytest -k "test_funcao"
 ```
 
 ### Cobertura dos Testes
