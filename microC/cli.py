@@ -92,7 +92,7 @@ def main():
 
     if not args.ast and not args.cst and not args.lex:
         try:
-            lox_eval(source)
+            lox_eval(source, auto_execute_main=True)
         except Exception as e:
             on_error(e, args.pm)
 

@@ -186,6 +186,12 @@ class McTransformer(Transformer):
     def return_stmt(self, expr=None):
         return Return(expr)
     
+    def expr_stmt(self, expr):
+        """
+        Implementa statement de expressão - simplesmente retorna a expressão.
+        """
+        return expr
+    
     def param_list(self, *args):
         return list(args)
 

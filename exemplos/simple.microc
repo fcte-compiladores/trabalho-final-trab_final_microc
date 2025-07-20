@@ -1,0 +1,12 @@
+// Simple MicroC program demonstrating basic functionality
+int main() {
+    int x = 10;
+    int y = 20;
+    int sum = x + y;
+    
+    printf(x);    // Will print 10
+    printf(y);    // Will print 20  
+    printf(sum);  // Will print 30
+    
+    return 0;
+}

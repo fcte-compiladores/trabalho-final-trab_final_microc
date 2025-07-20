@@ -59,9 +59,24 @@ class Stmt(Node, ABC):
 class Program(Node):
     stmts: list[Stmt]
 
-    def eval(self, ctx: Ctx):
+    def eval(self, ctx: Ctx, auto_execute_main: bool = False):
         for stmt in self.stmts:
             stmt.eval(ctx)
+        
+        # Se existe uma função main e auto_execute_main é True, executa automaticamente
+        if auto_execute_main and 'main' in ctx:
+            main_entry = ctx.scope['main']
+            if isinstance(main_entry, tuple) and len(main_entry) == 2:
+                main_func = main_entry[1]
+                from .runtime import McFunction
+                if isinstance(main_func, McFunction):
+                    try:
+                        main_func()  # Chama a função main sem argumentos
+                    except Exception as e:
+                        # Se for um McReturn, não é um erro
+                        from .runtime import McReturn
+                        if not isinstance(e, McReturn):
+                            raise
 
     def validate_self(self, cursor: Cursor):
         pass
