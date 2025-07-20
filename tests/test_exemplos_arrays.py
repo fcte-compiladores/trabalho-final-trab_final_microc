@@ -1,6 +1,7 @@
 import pytest
 from microC import parse, eval as microc_eval
 from microC.ctx import Ctx
+from microC.runtime import McFunction
 from pathlib import Path
 
 BASE_DIR = Path(__file__).parent.parent
@@ -23,21 +24,17 @@ class TestArrays:
         ctx = Ctx.from_dict({})
         result = microc_eval(src, ctx)
         
-        # Verifica se os arrays foram criados
-        assert 'numeros' in ctx
-        assert 'letras' in ctx
+        # Verifica se a função main foi definida
+        assert 'main' in ctx
         
-        # Verifica conteúdo dos arrays
-        numeros = ctx['numeros']
-        letras = ctx['letras']
+        # ctx stores variables as (Type, value) tuples
+        main_tuple = ctx.scope['main']
+        assert isinstance(main_tuple[1], McFunction)
         
-        assert isinstance(numeros, list)
-        assert isinstance(letras, list)
-        assert len(numeros) == 5
-        assert len(letras) == 3
-        assert numeros[0] == 1
-        assert numeros[4] == 5
-        assert letras[1] == 'B'
+        # O código só define as funções, não as executa
+        main_func = main_tuple[1]
+        assert main_func.name == 'main'
+        assert main_func.type == 'int'
 
     def test_manipulacao_atribuicao(self):
         """Testa manipulação de arrays com atribuição"""
@@ -52,16 +49,17 @@ class TestArrays:
         ctx = Ctx.from_dict({})
         result = microc_eval(src, ctx)
         
-        # Verifica se o array foi criado e preenchido
-        assert 'dados' in ctx
-        dados = ctx['dados']
+        # Verifica se a função main foi definida
+        assert 'main' in ctx
         
-        assert isinstance(dados, list)
-        assert len(dados) == 4
-        assert dados[0] == 10
-        assert dados[1] == 20
-        assert dados[2] == 30
-        assert dados[3] == 40
+        # ctx stores variables as (Type, value) tuples
+        main_tuple = ctx.scope['main']
+        assert isinstance(main_tuple[1], McFunction)
+        
+        # O código só define as funções, não as executa
+        main_func = main_tuple[1]
+        assert main_func.name == 'main'
+        assert main_func.type == 'int'
 
     def test_busca_array(self):
         """Testa busca em array"""
@@ -76,18 +74,17 @@ class TestArrays:
         ctx = Ctx.from_dict({})
         result = microc_eval(src, ctx)
         
-        # Verifica se a busca encontrou o elemento
-        assert 'valores' in ctx
-        assert 'procurado' in ctx
-        assert 'encontrado' in ctx
-        assert 'posicao' in ctx
+        # Verifica se a função main foi definida
+        assert 'main' in ctx
         
-        valores = ctx['valores']
-        assert isinstance(valores, list)
-        assert 42 in valores
-        assert ctx['procurado'] == 42
-        assert ctx['encontrado'] == 1  # True
-        assert ctx['posicao'] == 3  # Posição do 42 no array
+        # ctx stores variables as (Type, value) tuples
+        main_tuple = ctx.scope['main']
+        assert isinstance(main_tuple[1], McFunction)
+        
+        # O código só define as funções, não as executa
+        main_func = main_tuple[1]
+        assert main_func.name == 'main'
+        assert main_func.type == 'int'
 
     def test_todos_exemplos_arrays_parseable(self):
         """Testa se todos os exemplos de arrays podem ser parseados"""

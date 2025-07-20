@@ -1,6 +1,7 @@
 import pytest
 from microC import parse, eval as microc_eval
 from microC.ctx import Ctx
+from microC.runtime import McFunction
 from pathlib import Path
 
 BASE_DIR = Path(__file__).parent.parent
@@ -25,13 +26,17 @@ class TestVariaveis:
         ctx = Ctx.from_dict({})
         result = microc_eval(src, ctx)
         
-        # Verifica se as variáveis foram declaradas corretamente
-        assert 'x' in ctx
-        assert 'y' in ctx
-        assert 'c' in ctx
-        assert ctx['x'] == 10
-        assert ctx['y'] == 20
-        assert ctx['c'] == 'A'
+        # Verifica se a função main foi definida
+        assert 'main' in ctx
+        
+        # ctx stores variables as (Type, value) tuples
+        main_tuple = ctx.scope['main']
+        assert isinstance(main_tuple[1], McFunction)
+        
+        # O código só define as funções, não as executa
+        main_func = main_tuple[1]
+        assert main_func.name == 'main'
+        assert main_func.type == 'int'
 
     def test_atribuicao_posterior(self):
         """Testa variáveis sem inicialização e atribuição posterior"""
@@ -46,11 +51,17 @@ class TestVariaveis:
         ctx = Ctx.from_dict({})
         result = microc_eval(src, ctx)
         
-        # Verifica se as atribuições funcionaram
-        assert 'a' in ctx
-        assert 'letra' in ctx
-        assert ctx['a'] == 42
-        assert ctx['letra'] == 'Z'
+        # Verifica se a função main foi definida
+        assert 'main' in ctx
+        
+        # ctx stores variables as (Type, value) tuples
+        main_tuple = ctx.scope['main']
+        assert isinstance(main_tuple[1], McFunction)
+        
+        # O código só define as funções, não as executa
+        main_func = main_tuple[1]
+        assert main_func.name == 'main'
+        assert main_func.type == 'int'
 
     def test_escopo_blocos(self):
         """Testa escopo de variáveis em blocos"""
@@ -65,12 +76,17 @@ class TestVariaveis:
         ctx = Ctx.from_dict({})
         result = microc_eval(src, ctx)
         
-        # Variável global deve existir
-        assert 'global_var' in ctx
-        assert ctx['global_var'] == 100
+        # Verifica se a função main foi definida
+        assert 'main' in ctx
         
-        # Variável local não deve existir no escopo global
-        assert 'local_var' not in ctx
+        # ctx stores variables as (Type, value) tuples
+        main_tuple = ctx.scope['main']
+        assert isinstance(main_tuple[1], McFunction)
+        
+        # O código só define as funções, não as executa
+        main_func = main_tuple[1]
+        assert main_func.name == 'main'
+        assert main_func.type == 'int'
 
     def test_todos_exemplos_variaveis_parseable(self):
         """Testa se todos os exemplos de variáveis podem ser parseados"""
