@@ -346,8 +346,8 @@ class Function(Stmt):
 
     def eval(self, ctx: "Ctx"):
         stmts = self.body.stmts if hasattr(self.body, "stmts") else [self.body]
-        func = McFunction(self.name, self.params, stmts, ctx)
-        ctx.var_def(self.name, func)
+        func = McFunction(self.type.name, self.name, self.params, stmts, ctx)
+        ctx.var_def(self.type, self.name, func)
         return func
 
     def validate_self(self, cursor: Cursor):

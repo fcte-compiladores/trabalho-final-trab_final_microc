@@ -142,7 +142,14 @@ class McTransformer(Transformer):
             raise ValueError("Declaracao de variavel do tipo void nao e permitido")
         return VarDef(type_node, name.name, value)
     
-    def func_decl(self, type_node, name, params, body):
+    def func_decl(self, type_node, name, *rest):
+        # Handle optional param_list - can be (params, body) or just (body,)
+        if len(rest) == 2:
+            params, body = rest
+        else:
+            params = None
+            body = rest[0]
+            
         if params is None:
             params = []
         param_names = [p.name for p in params] if params else []
@@ -180,11 +187,14 @@ class McTransformer(Transformer):
         return Return(expr)
     
     def param_list(self, *args):
-        params = []
-        for i in range(0, len(args), 2):
-            if i + 1 < len(args):
-                params.append(args[i + 1])
-        return params
+        return list(args)
+
+    def simple_param(self, type_node, name):
+        return Var(name.name)
+
+    def array_param(self, type_node, name):
+        # For array parameters, we still create a Var but mark it as an array parameter
+        return Var(name.name)
 
     def arg_list(self, *args):
         return list(args)
