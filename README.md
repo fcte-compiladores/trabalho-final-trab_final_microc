@@ -2,6 +2,7 @@
 
 ## Integrantes
 - Victor Pontual - 211029601
+- Rafael Melatti - 241011626
 
 ## Introdução
 
